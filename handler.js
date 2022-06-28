@@ -2505,6 +2505,16 @@ headerType: 4
 kagura.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break
+case 'hekel': {
+let buttonMessage = {
+image: { url: 'https://betarest.herokuapp.com/api/wallpaper/hekel?apikey=APIKEY' },
+caption: ` Random ${command}`,
+footer: kagura.user.name,
+headerType: 4
+}
+kagura.sendMessage(m.chat, buttonMessage, { quoted: m })
+}
+break
 case 'onepiece': {
 let buttonMessage = {
 image: { url: 'https://betabotz-api.herokuapp.com/api/wallpaper/onepiece?apikey=BetaBotz' },
