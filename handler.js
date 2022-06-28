@@ -505,6 +505,20 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             }
             }
             break
+	  //MEDIAFIRE
+  case 'mediafire'
+  if (!text) throw 'Masukkan Query Link!'
+  if (!isUrl(q)) return reply(wrongFormat(prefix)) 
+  await m.reply(mess.wait) 
+  let now = await fetchJson(`https://betarest.herokuapp.com/api/download/mediafire?url=${text}&apikey=APIKEY`) 
+  let buttonMessage = {
+  	document: { url: now.result.link }
+  }
+  kagura.sendMessage(m.chat, buttonMessage, {quoted: m}) 
+  .catch((err) => {
+  	m.reply('Fitur Eror') 
+  }) 
+  break
             case 'delttc': case 'delttt': {
             this.game = this.game ? this.game : {}
             try {
