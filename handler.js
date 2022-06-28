@@ -505,20 +505,6 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             }
             }
             break
-	  //MEDIAFIRE
-  case 'mediafire'
-  if (!text) throw 'Masukkan Query Link!'
-  if (!isUrl(q)) return reply(wrongFormat(prefix)) 
-  await m.reply(mess.wait) 
-  let now = await fetchJson(`https://betarest.herokuapp.com/api/download/mediafire?url=${text}&apikey=APIKEY`) 
-  let buttonMessage = {
-  	document: { url: now.result.link }
-  }
-  kagura.sendMessage(m.chat, buttonMessage, {quoted: m}) 
-  .catch((err) => {
-  	m.reply('Fitur Eror') 
-  }) 
-  break
             case 'delttc': case 'delttt': {
             this.game = this.game ? this.game : {}
             try {
@@ -845,16 +831,6 @@ m.reply(`  ❏ *Voice Changer*
  › #robot
  › #slow
  › #tupai`)
-}
-break
-case 'tp1': {
-m.reply(` klik link di bawah ini untuk membeli\n
-http://wa.me/6281346056186?text=KAK+AKU+MAU+TOPUP+FF+5+Diamond`)
-}
-break
-case 'tp2': {
-m.reply(` klik link di bawah ini untuk membeli\n
-http://wa.me/6281346056186?text=KAK+AKU+MAU+TOPUP+FF+10+Diamond`)
 }
 break
             case 'chat': {
