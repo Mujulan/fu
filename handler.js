@@ -2437,6 +2437,71 @@ predea = await axios.get(`https://api.agify.io/?name=${q}`)
 reply(`Nama : ${predea.data.name}\n*Mati Pada Umur :* ${predea.data.age} Tahun.\n\n_Cepet Cepet Tobat Bro Soalnya Mati ga ada yang tau_`)
 }
 break
+case 'nulis': case 'nuliskanan':{
+if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+db.data.users[m.sender].limit -= 1 // -1 limit
+if (args.length < 1) return m.reply(`Kirim perintah *${prefix}nuliskanan* teks`)
+m.reply(mess.wait)
+                var tulisan = body.slice(12)
+                var splitText = tulisan.replace(/(\S+\s*){1,9}/g, '$&\n')
+                var fixHeight = splitText.split('\n').slice(0, 31).join('\n')
+                spawn('convert', ['./connect/nulis/buku/sebelumkanan.jpg','-font','./connect/nulis/font/Indie-Flower.ttf','-size','960x1280','-pointsize','23','-interline-spacing','2','-annotate','+128+129',fixHeight,'./connect/nulis/buku/setelahkanan.jpg'])
+                .on('error', () => m.reply('error'))
+                .on('exit', () => {
+               kagura.sendMessage(m.chat, { image: fs.readFileSync('./connect/nulis/buku/setelahkanan.jpg')}, {quoted: m, caption: `Jangan Malas Kak...`})
+                })
+            }
+                m.reply(`*1 Limit Terpakai*\n*Sisa Limit Anda : ${global.db.data.users[m.sender].limit}*`)
+break
+case 'nuliskiri':{
+if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+db.data.users[m.sender].limit -= 1 // -1 limit
+if (args.length < 1) return m.reply(`Kirim perintah *${prefix}nuliskiri* teks`)
+m.reply(mess.wait)
+var tulisan = body.slice(11)
+var splitText = tulisan.replace(/(\S+\s*){1,9}/g, '$&\n')
+var fixHeight = splitText.split('\n').slice(0, 31).join('\n')
+spawn('convert', ['./connect/nulis/buku/sebelumkiri.jpg','-font','./connect/nulis/font/Indie-Flower.ttf','-size','960x1280','-pointsize','22','-interline-spacing','2','-annotate','+140+153',fixHeight,'./connect/nulis/buku/setelahkiri.jpg'])
+.on('error', () => m.reply('error'))
+.on('exit', () => {
+kagura.sendMessage(m.chat, { image: fs.readFileSync('./connect/nulis/buku/setelahkiri.jpg')}, {quoted: m, caption: `Jangan Malas Kak...`})
+})
+}
+m.reply(`*1 Limit Terpakai*\n*Sisa Limit Anda : ${global.db.data.users[m.sender].limit}*`)
+break
+case 'foliokiri':{
+if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+db.data.users[m.sender].limit -= 1 // -1 limit
+ if (args.length < 1) return m.reply(`Kirim perintah *${prefix}foliokiri* teks`)
+m.reply(mess.wait)
+                var tulisan = body.slice(11)
+                var splitText = tulisan.replace(/(\S+\s*){1,13}/g, '$&\n')
+                var fixHeight = splitText.split('\n').slice(0, 38).join('\n')
+                spawn('convert', ['./connect/nulis/buku/folio/sebelumkiri.jpg','-font','./connect/nulis/font/Indie-Flower.ttf','-size','1720x1280','-pointsize','23','-interline-spacing','4','-annotate','+48+185',fixHeight,'./connect/nulis/buku/folio/setelahkiri.jpg'])
+                .on('error', () => m.reply('error'))
+                .on('exit', () => {
+                kagura.sendMessage(m.chat, { image: fs.readFileSync('./connect/nulis/buku/folio/setelahkiri.jpg')}, {quoted: m, caption: `Jangan Malas Kak...`})
+                })
+            }
+            
+                m.reply(`*1 Limit Terpakai*\n*Sisa Limit Anda : ${global.db.data.users[m.sender].limit}*`)
+break
+case 'foliokanan':{
+if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+db.data.users[m.sender].limit -= 1 // -1 limit
+if (args.length < 1) return m.reply(`Kirim perintah *${prefix}foliokanan* teks`)
+m.reply(mess.wait)
+                var tulisan = body.slice(12)
+                var splitText = tulisan.replace(/(\S+\s*){1,13}/g, '$&\n')
+                var fixHeight = splitText.split('\n').slice(0, 38).join('\n')
+                spawn('convert', ['./connect/nulis/buku/folio/sebelumkanan.jpg','-font','./connect/nulis/font/Indie-Flower.ttf','-size','960x1280','-pointsize','23','-interline-spacing','3','-annotate','+89+190',fixHeight,'./connect/nulis/buku/folio/setelahkanan.jpg'])
+                .on('error', () => m.reply('error'))
+                .on('exit', () => {
+                kagura.sendMessage(m.chat, { image: fs.readFileSync('./connect/nulis/buku/folio/setelahkanan.jpg')}, {quoted: m, caption: `Jangan Malas Kak...`})
+                })
+            }
+                m.reply(`*1 Limit Terpakai*\n*Sisa Limit Anda : ${global.db.data.users[m.sender].limit}*`)
+break
 //Textpromenu
 case 'magma': case '3dstone': case 'hallowen': case 'larva': 
   if (!text) throw `Example : ${prefix + command} LannGanz`
@@ -2541,7 +2606,7 @@ case 'tiktokwm': case 'ttwm': case 'withwm':
   if (!isUrl(q)) return reply(wrongFormat(prefix))
   if (!q.includes('tiktok')) return reply(notLink())
   await m.reply(mess.wait)
-  let now = await fetchJson(`https://betabotz-api.herokuapp.com/api/download/tiktok?url=${text}&apikey=BetaBotz`)
+  let now = await fetchJson(`https://betarest.herokuapp.com/api/download/tiktok?url=${text}&apikey=APIKEY`)
   let buttonswm = [{buttonId: `tiktokwm ${text}`, buttonText: {displayText: 'WM 📝'}, type: 1},{buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: 'Audio 🎵'}, type: 1}]
   let buttonMessageWm = {
   video: { url: now.result.watermark },
@@ -2560,7 +2625,7 @@ case 'tiktokwm': case 'ttwm': case 'withwm':
   if (!isUrl(q)) return reply(wrongFormat(prefix))
   if (!q.includes('tiktok')) return reply(notLink())
   await m.reply(mess.wait)
-  let vids = await fetchJson(`https://betabotz-api.herokuapp.com/api/download/tiktok?url=${text}&apikey=BetaBotz`)
+  let vids = await fetchJson(`https://betarest.herokuapp.com/api/download/tiktok?url=${text}&apikey=APIKEY`)
   let buttonsnowm = [{buttonId: `tiktokwm ${text}`, buttonText: {displayText: 'WM 📝'}, type: 1},{buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: 'Audio 🎵'}, type: 1}]
   let buttonMessageNoWm = {
   video: { url: vids.result.nowatermark },
